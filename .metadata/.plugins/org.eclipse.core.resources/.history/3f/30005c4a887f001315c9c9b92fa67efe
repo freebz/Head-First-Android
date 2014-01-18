@@ -1,0 +1,37 @@
+package com.example.skateboardingpals;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		renderContact();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	private void renderContact() {
+		TextView contactNameView =
+				(TextView) findViewById(R.id.contact_name);
+		TextView contactPhoneView =
+				(TextView) findViewById(R.id.contact_phone);
+		ImageView photoView =
+				(ImageView) findViewById(R.id.contact_photo);
+		
+		contactNameView.setText("Select a contact");
+		contactPhoneView.setText("");
+		photoView.setImageBitmap(null);
+	}
+}

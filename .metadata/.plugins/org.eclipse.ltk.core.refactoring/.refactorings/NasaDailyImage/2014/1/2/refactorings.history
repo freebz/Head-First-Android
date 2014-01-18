@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;NasaDailyImage/res/layout/activity_nasa_daily_image.xml&apos; to &apos;main.xml&apos;" description="Rename resource &apos;activity_nasa_daily_image.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/activity_nasa_daily_image.xml" name="main.xml" stamp="1389455265821" updateReferences="true"/>
+</session>

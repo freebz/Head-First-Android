@@ -1,0 +1,71 @@
+package com.example.timetracker;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class TimeTrackerDatabaseHelper {
+	
+	private static final int DATABASE_VERSION = 2;
+	private static final String DATABASE_NAME = "timetracker.db";
+	private static final String TABLE_NAME = "timerecords";
+	
+	public static final String TIMETRACKER_COLUMN_ID = "id";
+	public static final String TIMETRACKER_COLUMN_TIME = "time";
+	public static final String TIMETRACKER_COLUMN_NOTES = "notes";
+	
+	private TimeTrackerOpenHelper openHelper;
+	private SQLiteDatabase database;
+	
+	TimeTrackerDatabaseHelper(Context context) {
+		openHelper = new TimeTrackerOpenHelper(context);
+		database = openHelper.getWritableDatabase();
+	}
+	
+	private class TimeTrackerOpenHelper extends SQLiteOpenHelper {
+
+		TimeTrackerOpenHelper(Context context) {
+			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		}
+		
+		@Override
+		public void onCreate(SQLiteDatabase database) {
+			database.execSQL(
+					"CREATE TABLE " + TABLE_NAME + "( "
+					+ TIMETRACKER_COLUMN_ID + " INTEGER PRIMARY KEY, "
+					+ TIMETRACKER_COLUMN_TIME + " TEXT, "
+					+ TIMETRACKER_COLUMN_NOTES + " TEXT )"
+					);
+		}
+	
+		@Override
+		public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+			database.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+			onCreate(database);
+		}
+	}
+	
+	public void saveTimeRecord(String time, String notes) {
+		/*
+		database.execSQL("INSERT INTO TIMERECORDS"
+				+ " (TIME, NOTES)"
+				+ " VALUES ('" + time + "', '" + notes + "')"
+				);
+				*/
+		ContentValues contentValues = new ContentValues();
+		
+		contentValues.put(TIMETRACKER_COLUMN_TIME, time);
+		contentValues.put(TIMETRACKER_COLUMN_NOTES, notes);
+		
+		database.insert(TABLE_NAME, null, contentValues);
+	}
+	
+	public Cursor getAllTimeRecords() {
+		return database.rawQuery(
+				"select * from " + TABLE_NAME,
+				null
+				);
+	}
+}

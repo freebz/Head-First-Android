@@ -1,0 +1,27 @@
+package com.example.timetracker;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class TimeTrackerOpenHelper extends SQLiteOpenHelper {
+	
+	TimeTrackerOpenHelper(Context context) {
+		super(context, "timetracker.db", null, 1);
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase database) {
+		database.execSQL(
+				"create table timerecords " +
+				"(id integer primary key, time text, notes text)"
+						);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+		database.execSQL("DROP TABLE IF EXISTS timerecords");
+		onCreate(database);
+	}
+
+}

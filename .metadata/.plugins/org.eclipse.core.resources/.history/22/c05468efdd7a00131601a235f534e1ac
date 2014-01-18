@@ -1,0 +1,33 @@
+package com.example.timetracker;
+
+import java.util.ArrayList;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
+public class TimeTrackerAdapter extends BaseAdapter {
+	
+	private ArrayList<TimeRecord> times = new ArrayList<TimeRecord>();
+
+	@Override
+	public int getCount() {
+		return times.size();
+	}
+
+	@Override
+	public Object getItem(int index) {
+		return getItem(index);
+	}
+
+	@Override
+	public long getItemId(int index) {
+		return index;
+	}
+
+	@Override
+	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		return null;
+	}
+
+}
